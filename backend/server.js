@@ -1,8 +1,12 @@
 const dotenv = require('dotenv');
-dotenv.config();
 
-const connectDB = require('./src/config/db'); // ← src/ because db.js is inside src
-const app = require('./src/app');             // ← src/ because app.js is inside src
+// Only load .env file locally — Render injects variables directly
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config();
+}
+
+const connectDB = require('./src/config/db');
+const app = require('./src/app');
 
 connectDB();
 

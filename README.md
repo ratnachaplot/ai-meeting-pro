@@ -223,14 +223,3 @@ Output Directory: dist
 
 ---
 
-## 👨‍💻 Author
-
-**Ratna Chaplot**
-- GitHub: [@ratnachaplot](https://github.com/ratnachaplot)
-- Live Project: [ai-meeting-pro.vercel.app](https://ai-meeting-pro.vercel.app)
-
----
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).

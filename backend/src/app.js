@@ -4,13 +4,8 @@ const meetingRoutes = require('./routes/meetingRoutes');
 
 const app = express();
 
-app.use(cors({
-  origin: [
-    'http://localhost:5173',
-    'https://ai-meeting-pro.vercel.app/'  // ← you'll know exact URL after deploying
-  ],
-  methods: ['GET', 'POST', 'PATCH', 'DELETE']
-}));
+// Temporarily allow ALL origins to test if CORS is the issue
+app.use(cors());
 
 app.use(express.json());
 

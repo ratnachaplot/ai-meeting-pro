@@ -7,7 +7,7 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:5173',
-    'https://ai-meeting-pro.vercel.app'  // ← you'll know exact URL after deploying
+    'https://ai-meeting-pro.vercel.app/'  // ← you'll know exact URL after deploying
   ],
   methods: ['GET', 'POST', 'PATCH', 'DELETE']
 }));

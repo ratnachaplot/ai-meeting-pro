@@ -122,9 +122,33 @@ const toggleActionItem = async (req, res) => {
   }
 };
 
+// ─────────────────────────────────────────────────────
+// CONTROLLER 5: Delete a meeting by ID
+// ─────────────────────────────────────────────────────
+const deleteMeeting = async (req, res) => {
+  try {
+    const meeting = await Meeting.findById(req.params.id);
+
+    if (!meeting) {
+      return res.status(404).json({ message: 'Meeting not found' });
+    }
+
+    // Delete the meeting from MongoDB
+    await Meeting.findByIdAndDelete(req.params.id);
+
+    // 200 = success, send confirmation message
+    res.status(200).json({ message: 'Meeting deleted successfully' });
+
+  } catch (error) {
+    console.error('Error deleting meeting:', error);
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
 module.exports = {
   analyzeMeeting,
   getAllMeetings,
   getMeetingById,
-  toggleActionItem
+  toggleActionItem,
+  deleteMeeting
 };

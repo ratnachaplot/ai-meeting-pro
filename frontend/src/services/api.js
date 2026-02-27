@@ -10,3 +10,4 @@ export const analyzeMeeting  = (transcript, title) => api.post('/meetings', { tr
 export const getAllMeetings   = ()                  => api.get('/meetings');
 export const getMeetingById  = (id)                => api.get(`/meetings/${id}`);
 export const toggleActionItem = (meetingId, index) => api.patch(`/meetings/${meetingId}/toggle/${index}`);
+export const deleteMeeting    = (id)                => api.delete(`/meetings/${id}`);

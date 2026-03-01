@@ -22,15 +22,15 @@ function App() {
 
       <Routes>
         <Route path="/login"
-          element={isLoggedIn
-            ? <Navigate to="/" />
-            : <LoginPage darkMode={darkMode} setIsLoggedIn={setIsLoggedIn} />}
-        />
-        <Route path="/signup"
-          element={isLoggedIn
-            ? <Navigate to="/" />
-            : <SignupPage darkMode={darkMode} setIsLoggedIn={setIsLoggedIn} />}
-        />
+  element={isLoggedIn
+    ? <Navigate to="/" />
+    : <LoginPage darkMode={darkMode} setDarkMode={setDarkMode} setIsLoggedIn={setIsLoggedIn} />}
+/>
+<Route path="/signup"
+  element={isLoggedIn
+    ? <Navigate to="/" />
+    : <SignupPage darkMode={darkMode} setDarkMode={setDarkMode} setIsLoggedIn={setIsLoggedIn} />}
+/>
         <Route path="/" element={
           <ProtectedRoute>
             <HomePage darkMode={darkMode} />

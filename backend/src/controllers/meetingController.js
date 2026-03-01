@@ -56,6 +56,7 @@ const analyzeMeeting = async (req, res) => {
     const parsed = JSON.parse(cleaned);
 
     const newMeeting = await Meeting.create({
+      userId: req.user.id, // ← NEW: associate meeting with logged-in user
       title: title || 'Untitled Meeting',
       transcript,
       summary:     parsed.summary,
@@ -76,7 +77,7 @@ const analyzeMeeting = async (req, res) => {
 // ─────────────────────────────────────────────────────
 const getAllMeetings = async (req, res) => {
   try {
-    const meetings = await Meeting.find({})
+    const meetings = await Meeting.find({ userId: req.user.id })
       .sort({ createdAt: -1 })
       .select('-transcript');
     res.status(200).json(meetings);
@@ -90,7 +91,7 @@ const getAllMeetings = async (req, res) => {
 // ─────────────────────────────────────────────────────
 const getMeetingById = async (req, res) => {
   try {
-    const meeting = await Meeting.findById(req.params.id);
+    const meeting = await Meeting.findOne({ _id: req.params.id, userId: req.user.id });
     if (!meeting) {
       return res.status(404).json({ message: 'Meeting not found' });
     }
@@ -107,7 +108,7 @@ const toggleActionItem = async (req, res) => {
   try {
     const { meetingId, itemIndex } = req.params;
 
-    const meeting = await Meeting.findById(meetingId);
+    const meeting = await Meeting.findOne({ _id: meetingId, userId: req.user.id });
     if (!meeting) {
       return res.status(404).json({ message: 'Meeting not found' });
     }
@@ -127,7 +128,7 @@ const toggleActionItem = async (req, res) => {
 // ─────────────────────────────────────────────────────
 const deleteMeeting = async (req, res) => {
   try {
-    const meeting = await Meeting.findById(req.params.id);
+    const meeting = await Meeting.findOne({ _id: req.params.id, userId: req.user.id });
 
     if (!meeting) {
       return res.status(404).json({ message: 'Meeting not found' });

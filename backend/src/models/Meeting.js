@@ -10,6 +10,12 @@ const actionItemSchema = new mongoose.Schema({
 
 // Blueprint for a full meeting document
 const meetingSchema = new mongoose.Schema({
+  // ← NEW: link each meeting to a user
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
   title:       { type: String, default: 'Untitled Meeting' },
   transcript:  { type: String, required: true },
   summary:     { type: String, required: true },

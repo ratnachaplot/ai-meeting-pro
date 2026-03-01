@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // All backend calls go through this one file
 const api = axios.create({
-  baseURL: 'https://ai-meeting-backend-8yv9.onrender.com/api',
+  baseURL: 'http://localhost:5000/api',
   headers: { 'Content-Type': 'application/json' }
 });
 

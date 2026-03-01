@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import { login } from '../services/api'
 
-function LoginPage({ setIsLoggedIn }) {
+function LoginPage({ setIsLoggedIn , darkMode }) {
   const [email,    setEmail]    = useState('')
   const [password, setPassword] = useState('')
   const [loading,  setLoading]  = useState(false)

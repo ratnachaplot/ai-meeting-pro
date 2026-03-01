@@ -9,27 +9,28 @@ import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage'
 
 function App() {
-  const token = localStorage.getItem('token')
-
-  // Dark mode state — false = light, true = dark
-  const [darkMode, setDarkMode] = useState(false)
+  const [darkMode,    setDarkMode]    = useState(false)
+  const [isLoggedIn,  setIsLoggedIn]  = useState(!!localStorage.getItem('token'))
 
   return (
-    // Apply dark class to entire app based on darkMode state
     <div className={`min-h-screen transition-colors ${
       darkMode ? 'bg-gray-950 text-white' : 'bg-gray-50 text-gray-900'
     }`}>
       <Toaster position="top-right" />
 
-      {/* Pass darkMode and setDarkMode to Header */}
-      {token && <Header darkMode={darkMode} setDarkMode={setDarkMode} />}
+      {isLoggedIn && <Header darkMode={darkMode} setDarkMode={setDarkMode} setIsLoggedIn={setIsLoggedIn} />}
 
       <Routes>
-        {/* Public routes */}
-        <Route path="/login"  element={token ? <Navigate to="/" /> : <LoginPage  darkMode={darkMode} />} />
-        <Route path="/signup" element={token ? <Navigate to="/" /> : <SignupPage darkMode={darkMode} />} />
-
-        {/* Protected routes */}
+        <Route path="/login"
+          element={isLoggedIn
+            ? <Navigate to="/" />
+            : <LoginPage darkMode={darkMode} setIsLoggedIn={setIsLoggedIn} />}
+        />
+        <Route path="/signup"
+          element={isLoggedIn
+            ? <Navigate to="/" />
+            : <SignupPage darkMode={darkMode} setIsLoggedIn={setIsLoggedIn} />}
+        />
         <Route path="/" element={
           <ProtectedRoute>
             <HomePage darkMode={darkMode} />

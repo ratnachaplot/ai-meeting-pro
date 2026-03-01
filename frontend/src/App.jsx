@@ -9,43 +9,36 @@ import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage'
 
 function App() {
-  // useState so React re-renders when login status changes
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    !!localStorage.getItem('token') // true if token exists, false if not
-  )
+  const token = localStorage.getItem('token')
+
+  // Dark mode state — false = light, true = dark
+  const [darkMode, setDarkMode] = useState(false)
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    // Apply dark class to entire app based on darkMode state
+    <div className={`min-h-screen transition-colors ${
+      darkMode ? 'bg-gray-950 text-white' : 'bg-gray-50 text-gray-900'
+    }`}>
       <Toaster position="top-right" />
 
-      {/* Show Header only when logged in */}
-      {isLoggedIn && <Header setIsLoggedIn={setIsLoggedIn} />}
+      {/* Pass darkMode and setDarkMode to Header */}
+      {token && <Header darkMode={darkMode} setDarkMode={setDarkMode} />}
 
       <Routes>
         {/* Public routes */}
-        <Route
-          path="/login"
-          element={
-            isLoggedIn
-              ? <Navigate to="/" />
-              : <LoginPage setIsLoggedIn={setIsLoggedIn} />
-          }
-        />
-        <Route
-          path="/signup"
-          element={
-            isLoggedIn
-              ? <Navigate to="/" />
-              : <SignupPage setIsLoggedIn={setIsLoggedIn} />
-          }
-        />
+        <Route path="/login"  element={token ? <Navigate to="/" /> : <LoginPage  darkMode={darkMode} />} />
+        <Route path="/signup" element={token ? <Navigate to="/" /> : <SignupPage darkMode={darkMode} />} />
 
         {/* Protected routes */}
         <Route path="/" element={
-          <ProtectedRoute><HomePage /></ProtectedRoute>
+          <ProtectedRoute>
+            <HomePage darkMode={darkMode} />
+          </ProtectedRoute>
         } />
         <Route path="/history" element={
-          <ProtectedRoute><HistoryPage /></ProtectedRoute>
+          <ProtectedRoute>
+            <HistoryPage darkMode={darkMode} />
+          </ProtectedRoute>
         } />
       </Routes>
     </div>

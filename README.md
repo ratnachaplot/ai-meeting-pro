@@ -292,6 +292,5 @@ Output Directory: dist
 - [ ] Email delivery of meeting summaries
 - [ ] Forgot password and reset password flow
 - [ ] Rate limiting to prevent API abuse
-- [ ] Dark mode toggle
 - [ ] Meeting tags and categories
 

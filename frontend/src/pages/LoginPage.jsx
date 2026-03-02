@@ -94,13 +94,13 @@ function LoginPage({ setIsLoggedIn, darkMode, setDarkMode }) {
           </div>
 
           <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold
-                       hover:bg-blue-700 disabled:opacity-50 transition-colors"
-          >
-            {loading ? 'Logging in...' : 'Login'}
-          </button>
+  type="submit"
+  disabled={loading}
+  className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold
+             hover:bg-blue-700 disabled:opacity-50 transition-colors"
+>
+  {loading ? '⏳ Server waking up... please wait' : 'Login'}
+</button>
         </form>
 
         <p className={`text-center mt-6 text-sm ${
